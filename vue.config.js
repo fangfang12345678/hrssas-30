@@ -30,6 +30,12 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === "development",
   productionSourceMap: false,
   devServer: {
+    proxy: {
+      "/api": {
+        target: "http://42.192.129.12:3001", // 我们要代理的地址
+        changeOrigin: true,
+      },
+    },
     port: port,
     open: true,
     overlay: {
