@@ -2,6 +2,8 @@
   <div class="navbar">
     <hamburger
       :is-active="sidebar.opened"
+
+      
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
@@ -16,7 +18,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img
-            v-imageerror="defaultImg"
+            v-imgError="defaultImg"
             :src="$store.getters.avatar"
             class="user-avatar"
           />

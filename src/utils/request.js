@@ -16,7 +16,7 @@ function IsCheckTimeOut() {
 
 request.interceptors.request.use(
   (config) => {
-    console.log(config);
+    // console.log(config);
     if (store.getters.token) {
       if (IsCheckTimeOut()) {
         config.headers.Authorization = `Bearer ${store.getters.token}`;
@@ -48,6 +48,7 @@ request.interceptors.response.use(
       Message.error(message); // 提示错误消息
       return Promise.reject(new Error(message));
     }
+
   },
   (error) => {
     if (error.response.status === 401) {

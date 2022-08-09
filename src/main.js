@@ -1,6 +1,7 @@
 import Vue from "vue";
-
+import print from "vue-print-nb";
 import "normalize.css/normalize.css"; // A modern alternative to CSS resets
+import * as filters from "@/filters"; // 引入工具类
 
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -15,21 +16,18 @@ import router from "./router";
 import "@/icons"; // icon
 import "@/permission"; // permission control
 import * as directives from "@/directives";
+Vue.use(print);
 for (const key in directives) {
   Vue.directive(key, directives[key]);
 }
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
-// if (process.env.NODE_ENV === 'production') {
-// const { mockXHR } = require('../mock')
-//   mockXHR()
-// }
+//Vue.use可以传入对象和函数。传入对象，提供install方法，自动调用对象的install方法，然后把Vue传入。函数的话是直接调用函数，然后把Vue传入。
+import Component from "@/components";
+Vue.use(Component); // 注册自己的插件
+// 注册全局的过滤器
+Object.keys(filters).forEach((key) => {
+  // 注册过滤器
+  Vue.filter(key, filters[key]);
+});
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale });
